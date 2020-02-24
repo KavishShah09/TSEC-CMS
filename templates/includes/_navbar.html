@@ -5,13 +5,32 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
+                <a class="nav-link" href="/">Home<span class="sr-only"></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if session.logged_in %}
+            {% if session.role == 'admin' %}
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout<span class="sr-only"></span></a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login<span class="sr-only"></span></a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

@@ -2,18 +2,29 @@
 
 
 {% block body %}
-<div class="card text-white bg-info mb-3" style="border: none;">
+<div class="card text-white bg-dark mb-3 rounded-0" style="border: none;">
     <div class="row no-gutters">
-        <div class="col-md-4">
-            <img src="../static/MADLogo.png" class="card-img" alt="">
+        <div class="col-sm-2">
+            <img src="../static/MADLogo.png" class="card-img ml-5" alt="">
         </div>
-        <div class="col-md-8">
-            <div class="card-body">
+        <div class="col-sm-5">
+            <div class="card-body ml-5">
                 <h5 class="card-title">Welcome to the TSEC CMS</h5>
-                <p class="card-text">This app is built to register complaints on your behalf for the betterment of TSEC.
+                <p class="card-text mb-0">This app is built to register complaints on your behalf for the betterment of
+                    TSEC.
                 </p>
-                <p class="card-text"><small>Made as a task for MAD Club TSEC</small></p>
+                <p class="card-text mt-0"><small>Made as a task for MAD Club TSEC</small></p>
             </div>
+        </div>
+        <div class="col-sm-5 form-inline">
+            {% if session.logged_in %}
+            {% if session.role == 'admin' %}
+            <p><a class="btn btn-info ml-4" href="/dashboard">Dashboard</a></p>
+            {% endif %}
+            {% else %}
+            <p><a class="btn btn-info" href="/signup">Sign Up</a></p>
+            <p><a class="btn btn-info ml-4" href="/login">Login</a></p>
+            {% endif %}
         </div>
     </div>
 </div>

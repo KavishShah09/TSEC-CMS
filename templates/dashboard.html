@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="text-white">
+    <h1>Dashboard: <small>Welcome Admin {{session.username}}</small></h1>
+    <a class="btn btn-info mt-3" href="/add_complaint">Register Complaint</a>
+    <hr>
+    <table class="table table-striped text-white">
+        <tr>
+            <th>ID</th>
+            <th>Title <span class="ml-3">(Click on any to see contents)</span>
+            </th>
+            <th>Author</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for complaint in complaints %}
+        <tr>
+            <td> {{complaint.id}} </td>
+            <td><a href="/dashboard/{{complaint.id}}/" class="text-white"> {{complaint.title}} </a></td>
+            <td> {{complaint.author}} </td>
+            <td> {{complaint.issue_date}} </td>
+            <td> {{complaint.status}} </td>
+            <td>
+                <form action="{{url_for('status_complaint', id=complaint.id)}}" method="post">
+                    <input type="hidden" name="_method" value="STATUS">
+                    <input type="submit" value="Change Status" class="btn btn-primary float-right">
+                </form>
+            </td>
+            <td>
+                <form action="{{url_for('delete_complaint', id=complaint.id)}}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="Delete" class="btn btn-danger float-right">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr style="border-color: white;">
+</div>
+{% endblock %}
