@@ -31,7 +31,6 @@ class SignUpForm(Form):
         validators.EqualTo('confirm', message='Passwords do not match')
     ])
     confirm = PasswordField('Confirm Password')
-    role = SelectField('Role', choices=[('user', 'user'), ('admin', 'admin')])
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -43,11 +42,10 @@ def signup():
         year = form.year.data
         username = form.username.data
         password = sha256_crypt.encrypt(str(form.password.data))
-        role = form.role.data
 
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO users(name , email, year, username, password, role) VALUES(%s, %s, %s, %s, %s, %s)",
-                    (name, email, year, username, password, role))
+                    (name, email, year, username, password, 'user'))
         mysql.connection.commit()
         cur.close()
 
