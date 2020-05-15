@@ -14,7 +14,7 @@ Run queries.sql
 pip install flask
 pip install mysqlclient
 pip install flask-mysqldb
-pip install flask-WTForms
+pip install flask-WTF
 pip install passlib
 ```
 
